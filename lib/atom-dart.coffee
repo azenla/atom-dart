@@ -1,35 +1,23 @@
-AtomDartView = require './atom-dart-view'
 {CompositeDisposable} = require 'atom'
+{AnalysisClient} = require './analysis-client'
 
 module.exports = AtomDart =
-  atomDartView: null
-  modalPanel: null
   subscriptions: null
+  analysisClient: null
 
   activate: (state) ->
-    analysisClient = require './analysis_client.dart.js'
-    console.log analysisClient
-    @atomDartView = new AtomDartView(state.atomDartViewState)
-    @modalPanel = atom.workspace.addModalPanel(item: @atomDartView.getElement(), visible: false)
-
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
-    @subscriptions = new CompositeDisposable
+    @subscriptions = new CompositeDisposable()
+    @analysisClient = new AnalysisClient()
 
     # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace', 'atom-dart:toggle': => @toggle()
 
+    console.log 'Atom Dart was activated!'
+
   deactivate: ->
-    @modalPanel.destroy()
     @subscriptions.dispose()
-    @atomDartView.destroy()
 
   serialize: ->
-    atomDartViewState: @atomDartView.serialize()
 
   toggle: ->
-    console.log 'AtomDart was toggled!'
-
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
-    else
-      @modalPanel.show()

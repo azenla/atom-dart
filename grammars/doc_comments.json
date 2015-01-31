@@ -1,0 +1,19 @@
+{
+    "uuid": "d0da81c8-4db4-417e-8841-39af7029a5c6",
+    "patterns": [
+        {
+            "match": "\\[(.*)\\]\\((.*)\\)",
+            "captures": {
+                "1": {
+                    "name": "string.other.link.title.dart-doccomments"
+                },
+                "2": {
+                    "name": "markup.underline.link.dart-doccomments"
+                }
+            },
+            "name": "mata.link.inline.dart-doccomments"
+        }
+    ],
+    "scopeName": "text.dart-doccomments",
+    "name": "Dart Doc Comments"
+}
