@@ -6,6 +6,12 @@ module.exports = analysis_server =
   hostname: null
   port: null
   process: null
+  id: 0
+
+  send: (request) ->
+    reqJson = JSON.stringify(request)
+    console.log reqJson
+    @process.process.stdin.write(reqJson + "\n")
 
   start: () ->
     console.log("Starting analysis server")
@@ -24,7 +30,6 @@ module.exports = analysis_server =
       @process = new BufferedProcess({command, args, stdout, stderr, exit, options: {
         cwd: path
       }})
-
     else
       console.log("Dart SDK not set")
 
@@ -33,7 +38,16 @@ module.exports = analysis_server =
       "id": "shutdownRequest"
       "method": "server.shutdown"
     }
+    analysis_server.send(request)
 
-    reqJson = JSON.stringify(request)
-    console.log reqJson
-    @process.process.stdin.write(reqJson)
+  analysis_setAnalysisRoots: () ->
+    analysis_server.id += 1
+    request = {
+      "id": "" + analysis_server.id
+      "method": "analysis.setAnalysisRoots"
+      "params": {
+        "included": [atom.project.getPaths()[0]]
+        "excluded": null
+      }
+    }
+    analysis_server.send(request)

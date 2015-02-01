@@ -17,8 +17,10 @@ module.exports = AtomDart =
     # Register command that toggles this view
     @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:pub-get": => dart_sdk.pub.get()
     @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:pub-build": => dart_sdk.pub.build()
-    # @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:start-analysis-server": => dart_sdk.analysisServer.start()
-    # @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:shutdown-analysis-server": => dart_sdk.analysisServer.shutdown()
+
+    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:set-analysis-roots": => dart_sdk.analysisServer.analysis_setAnalysisRoots()
+    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:start-analysis-server": => dart_sdk.analysisServer.start()
+    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:shutdown-analysis-server": => dart_sdk.analysisServer.shutdown()
 
     console.log("Atom Dart was activated!")
     console.log(dart_sdk)
