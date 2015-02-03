@@ -20,23 +20,23 @@ module.exports = AtomDart =
     @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:pub-get": => sdk.pub.get()
     @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:pub-build": => sdk.pub.build()
 
-    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:set-analysis-roots": => sdk.analysisServer.analysis.setAnalysisRoots()
-    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:start-analysis-server": => sdk.analysisServer.start()
-    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:shutdown-analysis-server": => sdk.analysisServer.shutdown()
-    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:analysis-set-subscriptions": => sdk.analysisServer.server.setSubscriptions()
+    # @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:set-analysis-roots": => sdk.analysisServer.analysis.setAnalysisRoots()
+    # @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:start-analysis-server": => sdk.analysisServer.start()
+    # @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:shutdown-analysis-server": => sdk.analysisServer.shutdown()
+    # @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:analysis-set-subscriptions": => sdk.analysisServer.server.setSubscriptions()
 
     console.log("Atom Dart was activated!")
-    console.log(sdk)
+    # console.log(sdk)
 
     # Check if the current directory has a pubspec.yaml in it, if it does, start
     # the analyzer.
-    if (atom.project.getPaths().length > 0)
-      pubspecExists = fs.existsSync(path.join(atom.project.getPaths()[0], "pubspec.yaml"))
-      if (pubspecExists)
-        if (atom.config.get("atom-dart.autoRunPub") == true)
-          sdk.pub.get()
-        sdk.analysisServer.start()
-        sdk.analysisServer.analysis.setAnalysisRoots()
+    # if (atom.project.getPaths().length > 0)
+    #   pubspecExists = fs.existsSync(path.join(atom.project.getPaths()[0], "pubspec.yaml"))
+    #   if (pubspecExists)
+    #     if (atom.config.get("atom-dart.autoRunPub") == true)
+    #       sdk.pub.get()
+    #     sdk.analysisServer.start()
+    #     sdk.analysisServer.analysis.setAnalysisRoots()
 
   deactivate: ->
     @subscriptions.dispose()
