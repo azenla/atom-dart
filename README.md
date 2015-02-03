@@ -15,3 +15,6 @@ IDE-like support for Dart in Github's Atom (Still in alpha stages).
 - Snippets for common Dart code (such as getters, setters, functions (async, non-async), classes, future chaining, etc.
 - Editor functions for common pub commands (get, build, serve, run)
 - A browser for pub packages
+
+## Notes
+- When running `pub get` and the output box shows up on the bottom, you can close that via Ctrl+Shift+P -> 'Atom Dart: Clear Output'
