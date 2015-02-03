@@ -22,7 +22,7 @@ module.exports = analysis_server =
       console.log(analysisServerPath)
 
       command = "dart"
-      args = [analysisServerPath]
+      args = [analysisServerPath, "--sdk", @sdkPath]
       stdout = (output) -> analysis_server.out.write(output)
       stderr = (err) -> console.error("analysis server error: #{err}")
       exit = (code) -> console.log("analysis server exited with #{code}")
@@ -34,20 +34,34 @@ module.exports = analysis_server =
       console.log("Dart SDK not set")
 
   shutdown: () ->
+    analysis_server.id += 1
     request = {
-      "id": "shutdownRequest"
+      "id": "" + analysis_server.id
       "method": "server.shutdown"
     }
     analysis_server.send(request)
 
-  analysis_setAnalysisRoots: () ->
-    analysis_server.id += 1
-    request = {
-      "id": "" + analysis_server.id
-      "method": "analysis.setAnalysisRoots"
-      "params": {
-        "included": [atom.project.getPaths()[0]]
-        "excluded": null
+  analysis:
+    setAnalysisRoots: () ->
+      analysis_server.id += 1
+      request = {
+        "id": "" + analysis_server.id
+        "method": "analysis.setAnalysisRoots"
+        "params": {
+          "included": [atom.project.getPaths()[0]]
+          "excluded": []
+        }
       }
-    }
-    analysis_server.send(request)
+      analysis_server.send(request)
+
+  server:
+    setSubscriptions: () ->
+      analysis_server.id += 1
+      request = {
+        "id": "" + analysis_server.id
+        "method": "server.setSubscriptions"
+        "params": {
+          "subscriptions": ["STATUS"]
+        }
+      }
+      analysis_server.send(request)

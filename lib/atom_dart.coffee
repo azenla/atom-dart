@@ -1,5 +1,7 @@
+fs = require "fs"
+path = require "path"
 {CompositeDisposable} = require "atom"
-dart_sdk = require "./sdk.coffee"
+sdk = require "./sdk.coffee"
 DartSdkOutputView = require "./dart_sdk_output_view"
 
 module.exports = AtomDart =
@@ -11,19 +13,30 @@ module.exports = AtomDart =
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable()
     @sdkOutputView = new DartSdkOutputView()
-    dart_sdk.pub.out = @sdkOutputView
-    dart_sdk.analysisServer.out = @sdkOutputView
+    sdk.pub.out = @sdkOutputView
+    sdk.analysisServer.out = @sdkOutputView
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:pub-get": => dart_sdk.pub.get()
-    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:pub-build": => dart_sdk.pub.build()
+    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:pub-get": => sdk.pub.get()
+    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:pub-build": => sdk.pub.build()
 
-    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:set-analysis-roots": => dart_sdk.analysisServer.analysis_setAnalysisRoots()
-    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:start-analysis-server": => dart_sdk.analysisServer.start()
-    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:shutdown-analysis-server": => dart_sdk.analysisServer.shutdown()
+    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:set-analysis-roots": => sdk.analysisServer.analysis.setAnalysisRoots()
+    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:start-analysis-server": => sdk.analysisServer.start()
+    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:shutdown-analysis-server": => sdk.analysisServer.shutdown()
+    @subscriptions.add atom.commands.add "atom-workspace", "atom-dart:analysis-set-subscriptions": => sdk.analysisServer.server.setSubscriptions()
 
     console.log("Atom Dart was activated!")
-    console.log(dart_sdk)
+    console.log(sdk)
+
+    # Check if the current directory has a pubspec.yaml in it, if it does, start
+    # the analyzer.
+    if (atom.project.getPaths().length > 0)
+      pubspecExists = fs.existsSync(path.join(atom.project.getPaths()[0], "pubspec.yaml"))
+      if (pubspecExists)
+        if (atom.config.get("atom-dart.autoRunPub") == true)
+          sdk.pub.get()
+        sdk.analysisServer.start()
+        sdk.analysisServer.analysis.setAnalysisRoots()
 
   deactivate: ->
     @subscriptions.dispose()
