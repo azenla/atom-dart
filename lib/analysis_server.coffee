@@ -11,7 +11,7 @@ module.exports = analysis_server =
   send: (request) ->
     reqJson = JSON.stringify(request)
     console.log reqJson
-    @process.process.stdin.write(reqJson + "\n")
+    if @process @process.process.stdin.write(reqJson + "\n")
 
   start: () ->
     console.log("Starting analysis server")
@@ -23,15 +23,20 @@ module.exports = analysis_server =
 
       command = "dart"
       args = [analysisServerPath, "--sdk", @sdkPath]
-      stdout = (output) -> analysis_server.out.write(output)
-      stderr = (err) -> console.error("analysis server error: #{err}")
-      exit = (code) -> console.log("analysis server exited with #{code}")
+      stdout = (output) ->
+        analysis_server.processOutput(output)
+      stderr = (err) ->
+        console.error("analysis server error: #{err}")
+      exit = (code) ->
+        console.log("analysis server exited with #{code}")
 
       @process = new BufferedProcess({command, args, stdout, stderr, exit, options: {
         cwd: path
       }})
+      return this
     else
       console.log("Dart SDK not set")
+      return null
 
   shutdown: () ->
     analysis_server.id += 1
@@ -40,6 +45,10 @@ module.exports = analysis_server =
       "method": "server.shutdown"
     }
     analysis_server.send(request)
+
+  processOutput: (str) ->
+    json = JSON.parse(str) if str.contains("\n")
+    console.log(json)
 
   analysis:
     setAnalysisRoots: () ->
