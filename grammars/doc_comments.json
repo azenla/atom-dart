@@ -12,6 +12,60 @@
                 }
             },
             "name": "mata.link.inline.dart-doccomments"
+        },
+        {
+            "match": "(#\\w+)",
+            "captures": {
+                "1": {
+                    "name": "markup.heading.heading-1.gfm"
+                }
+            },
+            "name": "source.gfm"
+        },
+        {
+            "match": "(##\\w+)",
+            "captures": {
+                "1": {
+                    "name": "markup.heading.heading-2.gfm"
+                }
+            },
+            "name": "source.gfm"
+        },
+        {
+            "match": "(###\\w+)",
+            "captures": {
+                "1": {
+                    "name": "markup.heading.heading-3.gfm"
+                }
+            },
+            "name": "source.gfm"
+        },
+        {
+            "match": "(####\\w+)",
+            "captures": {
+                "1": {
+                    "name": "markup.heading.heading-4.gfm"
+                }
+            },
+            "name": "source.gfm"
+        },
+        {
+            "match": "(#####\\w+)",
+            "captures": {
+                "1": {
+                    "name": "markup.heading.heading-5.gfm"
+                }
+            },
+            "name": "source.gfm"
+        },
+        {
+            "match": "(######\\w+)",
+            "captures": {
+                "1": {
+                    "name": "markup.heading.heading-6.gfm"
+                }
+            },
+            "name": "source.gfm"
         }
     ],
     "scopeName": "text.dart-doccomments",
