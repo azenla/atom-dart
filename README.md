@@ -1,6 +1,6 @@
 # Atom Dart
 
-IDE-like support for Dart in Github's Atom (Still in alpha stages).
+IDE-like support for Dart in Github's Atom
 
 ## Current features
 - Basic syntax highlighting
