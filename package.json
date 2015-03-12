@@ -1,7 +1,7 @@
 {
   "name": "atom-dart",
   "main": "./lib/atom_dart",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "IDE-like Dart support for Atom (alpha quality)",
   "repository": "https://github.com/austincummings/atom-dart",
   "license": "MIT",
