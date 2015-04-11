@@ -1,0 +1,17 @@
+{
+    "version": "1.4.1",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs"
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [
+        "./analysis.ts",
+        "./atom_dart.ts",
+        "./utils.ts"
+    ],
+    "compileOnSave": false
+}
