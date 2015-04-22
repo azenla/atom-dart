@@ -8,7 +8,11 @@ The _Pub Output View_ is a view that shows the user all output from running the
 
 ### Dart VM Output View
 The _Dart VM Output View_ is a view that shows the user all output from running
-the `dart` command.
+the `dart` command on the currently opened file.
+
+### Analysis Output View
+The _Analysis Output View_ is a view to show all hints, warnings, and errors
+that the analysis server finds.
 
 ### Auto Completion View
 The _Auto Completion View_ is a view that will show up where the analysis
