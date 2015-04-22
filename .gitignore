@@ -2,3 +2,7 @@
 npm-debug.log
 node_modules
 packages
+
+**.js
+**.js.map
+package.json
