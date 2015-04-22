@@ -2,3 +2,4 @@ name: atom_dart
 dependencies:
   atom:
     git: https://github.com/DirectMyFile/atom.dart.git
+  logging: any
