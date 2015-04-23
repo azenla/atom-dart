@@ -1,6 +1,7 @@
 library atom_dart.views;
 
 import 'dart:html';
+import 'package:atom/atom.dart';
 
 class View {
   Element get element => _element;
@@ -54,12 +55,16 @@ class View {
       _panel.hide();
     }
   }
+
+  invalidate() {
+    build();
+  }
 }
 
 class DartOutlineView extends View {
   List items = [];
 
-  OListElement _listElement;
+  UListElement _listElement;
 
   DartOutlineView();
 
@@ -69,7 +74,7 @@ class DartOutlineView extends View {
         ..id = 'dart-outline-view';
 
     _element.children.add(new HeadingElement.h5()..text = 'Dart Outline');
-    _listElement = new OListElement();
+    _listElement = new UListElement();
     _element.children.add(_listElement);
 
     for (var item in items) {
@@ -92,7 +97,6 @@ class PubOutputView extends View {
 
   @override
   build() {
-
     _outputElement = new SpanElement();
 
     _element = new DivElement()
@@ -112,12 +116,16 @@ class PubOutputView extends View {
 }
 
 class DartIssuesView extends View {
-  List<AnalysisError> errors = [];
 
   DartAutoCompleteView();
 
   @override
   build() {
-
+    _element = new DivElement()
+        ..id = 'dart-issues-view'
+        ..classes = ['padded']
+        ..children = [
+          new UListElement()
+        ];
   }
 }
