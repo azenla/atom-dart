@@ -4,8 +4,8 @@ packages:
   atom:
     description:
       ref: null
-      resolved-ref: "22ac01380706fa72e9c62689285b23ed40b766fd"
-      url: "https://github.com/DirectMyFile/atom.dart.git"
+      resolved-ref: "7b9e72b20310153436ec52fe7f082c6644e28da0"
+      url: "https://github.com/austincummings/atom.dart.git"
     source: git
     version: "1.0.0-v0.190.0"
   crypto:

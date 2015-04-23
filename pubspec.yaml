@@ -1,5 +1,5 @@
 name: atom_dart
 dependencies:
   atom:
-    git: https://github.com/DirectMyFile/atom.dart.git
+    git: https://github.com/austincummings/atom.dart.git
   logging: any

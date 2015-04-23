@@ -3,7 +3,7 @@ library atom_dart.sdk;
 import 'package:atom/atom.dart';
 import 'package:logging/logging.dart';
 
-final _log = new Logger('atom_dart.sdk')
+final _log = new Logger('atom_dart.sdk');
 
 abstract class DartSdkCall {
   _invoke();

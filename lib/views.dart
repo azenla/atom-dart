@@ -65,17 +65,27 @@ class DartOutlineView extends View {
   List items = [];
 
   UListElement _listElement;
+  DivElement _body;
 
   DartOutlineView();
 
   @override
   build() {
-    _element = new DivElement()
-        ..id = 'dart-outline-view';
-
-    _element.children.add(new HeadingElement.h5()..text = 'Dart Outline');
+    _body = new DivElement();
     _listElement = new UListElement();
-    _element.children.add(_listElement);
+
+    _element = new DivElement()
+      ..id = 'dart-outline-view'
+      ..children = [
+        new DivElement()
+          ..classes = ['panel-heading']
+          ..text = 'Outline',
+        _body
+          ..classes = ['panel-body', 'padded']
+          ..children = [
+            _listElement
+          ]
+      ];
 
     for (var item in items) {
       _listElement.children.add(item);
@@ -101,7 +111,6 @@ class PubOutputView extends View {
 
     _element = new DivElement()
       ..id = 'pub-output-view'
-      ..classes = ['padded']
       ..children = [
         new DivElement()
           ..classes = ['panel-heading']
@@ -110,7 +119,7 @@ class PubOutputView extends View {
           ..classes = ['panel-body', 'padded']
           ..children = [
             _outputElement
-          ]
+        ]
       ];
   }
 }
@@ -122,10 +131,10 @@ class DartIssuesView extends View {
   @override
   build() {
     _element = new DivElement()
-        ..id = 'dart-issues-view'
-        ..classes = ['padded']
-        ..children = [
-          new UListElement()
-        ];
+      ..id = 'dart-issues-view'
+      ..classes = []
+      ..children = [
+        new UListElement()
+      ];
   }
 }
