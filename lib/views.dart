@@ -41,18 +41,19 @@ class View {
     } else {
       show();
     }
-    _visible = !_visible;
   }
 
   void show() {
     if (_panel != null) {
       _panel.show();
+      _visible = true;
     }
   }
 
   void hide() {
     if (_panel != null) {
       _panel.hide();
+      _visible = false;
     }
   }
 
@@ -79,7 +80,15 @@ class DartOutlineView extends View {
       ..children = [
         new DivElement()
           ..classes = ['panel-heading']
-          ..text = 'Outline',
+          ..text = 'Outline'
+          ..children.addAll([
+            new SpanElement()
+              ..text = 'x'
+              ..classes = ['close-panel-button', 'pull-right']
+              ..onClick.listen((evt) {
+                hide();
+              })
+          ]),
         _body
           ..classes = ['panel-body', 'padded']
           ..children = [
@@ -114,12 +123,20 @@ class PubOutputView extends View {
       ..children = [
         new DivElement()
           ..classes = ['panel-heading']
-          ..text = 'Pub Output',
+          ..text = 'Pub Output'
+          ..children.addAll([
+            new SpanElement()
+              ..text = 'x'
+              ..classes = ['close-panel-button', 'pull-right']
+              ..onClick.listen((evt) {
+                hide();
+              })
+          ]),
         new DivElement()
           ..classes = ['panel-body', 'padded']
           ..children = [
             _outputElement
-        ]
+          ]
       ];
   }
 }

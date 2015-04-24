@@ -5,8 +5,11 @@ DartOutlineView outlineView;
 PubOutputView pubOutputView;
 
 void initDefaultCommands() {
-  atom.commands.add('atom-workspace', 'atom-dart:toggle-outline-view', (e) {
+  atom.commands.add('atom-workspace', 'atom-dart:toggle-outline-view', (_) {
     outlineView.toggle();
+  });
+  atom.commands.add('atom-workspace', 'atom-dart:toggle-pub-output-view', (_) {
+    pubOutputView.toggle();
   });
 }
 
