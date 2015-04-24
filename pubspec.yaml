@@ -4,4 +4,7 @@ dependencies:
     git: https://github.com/DirectMyFile/atom.dart.git
   logging: any
 transformers:
+- $dart2js:
+    checked: true
+    csp: true
 - atom
