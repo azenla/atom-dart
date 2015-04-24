@@ -1,5 +1,7 @@
 name: atom_dart
 dependencies:
   atom:
-    git: https://github.com/kaendfinger/atom.dart.git
+    git: https://github.com/DirectCode/atom.dart.git
   logging: any
+transformers:
+- atom
