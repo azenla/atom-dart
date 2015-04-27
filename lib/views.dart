@@ -96,9 +96,7 @@ class DartOutlineView extends View {
           ]
       ];
 
-    for (var item in items) {
-      _listElement.children.add(item);
-    }
+    _listElement.children.addAll(items);
   }
 
   addItem(String item) {
