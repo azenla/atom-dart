@@ -105,19 +105,19 @@ class DartOutlineView extends View {
   }
 }
 
-class PubOutputView extends View {
+class PubControlView extends View {
   var _outputElement;
 
-  set text(String val) => _outputElement.text = val;
+  PubControlView();
 
-  PubOutputView();
+  set text(String val) => _outputElement.text = val;
 
   @override
   build() {
     _outputElement = new SpanElement();
 
     _element = new DivElement()
-      ..id = 'pub-output-view'
+      ..id = 'pub-control-view'
       ..children = [
         new DivElement()
           ..classes = ['panel-heading']
@@ -131,9 +131,14 @@ class PubOutputView extends View {
               })
           ]),
         new DivElement()
-          ..classes = ['panel-body', 'padded']
           ..children = [
-            _outputElement
+            new DivElement()
+              ..classes = ['panel-body', 'padded']
+              ..children = [
+                _outputElement
+              ],
+            new DivElement()
+              ..classes = ['panel-body']
           ]
       ];
   }
