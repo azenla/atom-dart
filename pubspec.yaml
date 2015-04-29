@@ -7,4 +7,5 @@ transformers:
 - $dart2js:
     checked: true
     csp: true
+    minify: false
 - atom

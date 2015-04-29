@@ -2,14 +2,14 @@ import 'package:atom/atom.dart';
 import 'package:atom_dart/views.dart';
 
 DartOutlineView outlineView;
-PubControlView pubControlView;
+PubOutputView pubOutputView;
 
 void initDefaultCommands() {
   atom.commands.add('atom-workspace', 'atom-dart:toggle-outline-view', (_) {
     outlineView.toggle();
   });
   atom.commands.add('atom-workspace', 'atom-dart:toggle-pub-output-view', (_) {
-    pubControlView.toggle();
+    pubOutputView.toggle();
   });
 }
 
@@ -22,11 +22,11 @@ void activate() {
   outlineView.bindRightPanel();
   outlineView.hide();
 
-  pubControlView = new PubControlView();
-  pubControlView.build();
-  pubControlView.text = 'Hello world';
-  pubControlView.bindBottomPanel();
-  pubControlView.hide();
+  pubOutputView = new PubOutputView();
+  pubOutputView.build();
+  pubOutputView.text = 'Hello world';
+  pubOutputView.bindBottomPanel();
+  pubOutputView.hide();
 
   initDefaultCommands();
 }

@@ -6,14 +6,14 @@ import 'package:logging/logging.dart';
 final _log = new Logger('atom_dart.sdk');
 
 abstract class DartSdkCall {
-  _invoke();
+  Future _invoke();
 }
 
 class Pub implements DartSdkCall {
-  build();
-  serve();
+  Future build();
+  Future serve();
 
-  _invoke() {
+  Future _invoke() async {
     print('Invoking pub');
   }
 }
