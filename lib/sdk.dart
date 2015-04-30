@@ -1,5 +1,6 @@
 library atom_dart.sdk;
 
+import 'dart:async';
 import 'package:atom/atom.dart';
 import 'package:logging/logging.dart';
 
@@ -10,11 +11,23 @@ abstract class DartSdkCall {
 }
 
 class Pub implements DartSdkCall {
-  Future build();
+  Future build() {
+    return _invoke();
+  }
   Future serve();
 
   Future _invoke() async {
-    print('Invoking pub');
+    var pub = new BufferedProcess('ls', [],
+      stdout: _handleStdout,
+      exit: (_) {
+        print('Pub exit');
+      }
+    );
+  }
+
+  void _handleStdout(String data) {
+    print('stdout:');
+    print(data);
   }
 }
 

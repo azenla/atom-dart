@@ -3,10 +3,9 @@
 packages:
   atom:
     description:
-      ref: null
-      resolved-ref: "4006b44ae858e99e5c63aea39ae459e9f97564f1"
-      url: "https://github.com/DirectMyFile/atom.dart.git"
-    source: git
+      path: "C:\\Users\\Austin\\Workspace\\atom.dart"
+      relative: false
+    source: path
     version: "1.0.0-v0.190.0"
   barback:
     description: barback
@@ -39,4 +38,4 @@ packages:
   stack_trace:
     description: stack_trace
     source: hosted
-    version: "1.3.1"
+    version: "1.3.2"

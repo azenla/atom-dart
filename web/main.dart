@@ -1,5 +1,6 @@
 import 'package:atom/atom.dart';
 import 'package:atom_dart/views.dart';
+import 'package:atom_dart/sdk.dart';
 
 DartOutlineView outlineView;
 PubOutputView pubOutputView;
@@ -10,6 +11,10 @@ void initDefaultCommands() {
   });
   atom.commands.add('atom-workspace', 'atom-dart:toggle-pub-output-view', (_) {
     pubOutputView.toggle();
+  });
+  atom.commands.add('atom-workspace', 'atom-dart:pub-get', (_) {
+    var pub = new Pub();
+    pub.build();
   });
 }
 

@@ -1,7 +1,7 @@
 name: atom_dart
 dependencies:
   atom:
-    git: https://github.com/DirectMyFile/atom.dart.git
+    path: C:\Users\Austin\Workspace\atom.dart
   logging: any
 transformers:
 - $dart2js:
