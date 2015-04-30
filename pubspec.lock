@@ -3,9 +3,10 @@
 packages:
   atom:
     description:
-      path: "C:\\Users\\Austin\\Workspace\\atom.dart"
-      relative: false
-    source: path
+      ref: null
+      resolved-ref: d2489881c3085647db11555d4a3c9e1544f3f08f
+      url: "git@github.com:DirectMyFile/atom.dart"
+    source: git
     version: "1.0.0-v0.190.0"
   barback:
     description: barback

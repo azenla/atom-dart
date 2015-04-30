@@ -1,48 +1,49 @@
 library atom_dart.sdk;
 
 import 'dart:async';
+import 'dart:js' as js;
 import 'package:atom/atom.dart';
 import 'package:logging/logging.dart';
 
 final _log = new Logger('atom_dart.sdk');
 
-abstract class DartSdkCall {
-  Future _invoke();
-}
+class DartSdkCall {
+  Stream<String> get stdout => _stdoutController.stream;
+  Stream<String> get stderr => _stderrController.stream;
+  Stream<String> get onExit => _onExitController.stream;
 
-class Pub implements DartSdkCall {
-  Future build() {
-    return _invoke();
-  }
-  Future serve();
+  StreamController<String> _stdoutController = new StreamController<String>(sync: true);
+  StreamController<String> _stderrController = new StreamController<String>(sync: true);
+  StreamController<String> _onExitController = new StreamController<String>(sync: true);
 
-  Future _invoke() async {
-    var pub = new BufferedProcess('ls', [],
-      stdout: _handleStdout,
+  DartSdkCall();
+
+  void invoke(String command, List<String> args, Map options) {
+    var process = new BufferedProcess(command, args,
+      options: options,
+      stdout: (data) {
+        _stdoutController.add(data);
+      },
+      stderr: (data) {
+        _stderrController.add(data);
+      },
       exit: (_) {
-        print('Pub exit');
+        _onExitController.add(null);
       }
     );
   }
+}
 
-  void _handleStdout(String data) {
-    print('stdout:');
-    print(data);
+class Pub extends DartSdkCall {
+  Pub() : super();
+
+  void get(String cwd) {
+    super.stdout.listen((data) {
+      print('Pub stdout: $data');
+    });
+    super.stderr.listen((data) {
+      print('Pub stderr: $data');
+    });
+    super.invoke('pub', ['get'], {'cwd': cwd});
   }
-}
-
-class Dart2JS implements DartSdkCall {
-  compile();
-}
-
-class DartVM implements DartSdkCall {
-  run();
-}
-
-class DartDocGen implements DartSdkCall {
-  run();
-}
-
-class DartAnalyzer implements DartSdkCall {
-  run();
 }

@@ -1,11 +1,12 @@
 name: atom_dart
 dependencies:
   atom:
-    path: C:\Users\Austin\Workspace\atom.dart
+    git: git@github.com:DirectMyFile/atom.dart
   logging: any
 transformers:
 - $dart2js:
     checked: true
+    commandLineOptions: [--show-package-warnings]
     csp: true
     minify: false
 - atom

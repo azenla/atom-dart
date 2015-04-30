@@ -1,3 +1,4 @@
+import 'dart:js';
 import 'package:atom/atom.dart';
 import 'package:atom_dart/views.dart';
 import 'package:atom_dart/sdk.dart';
@@ -13,8 +14,9 @@ void initDefaultCommands() {
     pubOutputView.toggle();
   });
   atom.commands.add('atom-workspace', 'atom-dart:pub-get', (_) {
+    print('Running pub get');
     var pub = new Pub();
-    pub.build();
+    pub.get(r'C:\Users\Austin\Workspace\atom.dart');
   });
 }
 
