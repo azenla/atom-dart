@@ -1,5 +1,7 @@
 # Atom Dart
 
+[![Join the chat at https://gitter.im/austincummings/atom-dart](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/austincummings/atom-dart?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 IDE-like support for Dart in Github's Atom
 
 ## Current features
