@@ -1,33 +1,26 @@
-# Atom Dart Design
+# Atom Dart Design Doc
 
-## Views
+## Requirements
 
-### Pub Output View
-The _Pub Output View_ is a view that shows the user all output from running the
-`pub` command.
+1. Provide code-completion for Dart code and pubspec.yaml
+  files.
+2. Provide syntax highlighting for Dart code, Dart documentation comments, and
+  pubspec.yaml files.
+3. Provide refactoring functions for Dart code.
+4. Provide the ability to run Dart packages and show their
+  output in the editor.
+5. Allow for debugging of running Dart programs in the editor.
+  1. Allow for setting break points visually in the editor
+  2. Allow for stepping through code
+  3. Allow for viewing values of variables in the running program
+6. Allow the user to view an outline of the structure of a
+  Dart source code file.
 
-### Dart VM Output View
-The _Dart VM Output View_ is a view that shows the user all output from running
-the `dart` command on the currently opened file.
+## Design
 
-### Analysis Output View
-The _Analysis Output View_ is a view to show all hints, warnings, and errors
-that the analysis server finds.
+### Analysis Server Integration
 
-### Auto Completion View
-The _Auto Completion View_ is a view that will show up where the analysis
-server tells us we should put suggestions.
+The analysis server is
 
-### Outline View
-The _Outline View_ is a view that shows the user a detailed outline of the
-structure in the Dart source file currently being viewed.
-
-## Analysis Server
-Automatically starts when Atom is open in a folder with a `pubspec.yaml` file
-in it.
-
-## PubSpec Editor
-A graphical interface to allow easy editing of PubSpec files.
-
-## Project Generator
-TODO
+### PubSpec Details
+![](pubspec_editor.png)
