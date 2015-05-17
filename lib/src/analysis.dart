@@ -1,6 +1,10 @@
+// Written by Kenneth Endfinger
+
 import "dart:async";
 import "dart:convert";
+import 'package:atom/atom.dart';
 import "package:path/path.dart" as pathlib;
+import 'sdk.dart';
 
 abstract class AnalysisChannel {
   Future initialize();
@@ -26,52 +30,25 @@ class AnalysisClientError {
   }
 }
 
-Future<String> getExecutablePath() async {
-  var name = Platform.executable;
-  if (pathlib.isAbsolute(name)) {
-    return name;
-  }
-
-  var paths = Platform.environment["PATH"].split(Platform.isWindows ? ";" : ":");
-
-  for (var path in paths) {
-    var pexe = new File("${path}/dart");
-    var exe = new File("${path}/dart.exe");
-    if (await pexe.exists()) {
-      return pexe.resolveSymbolicLinksSync();
-    } else if (await exe.exists()) {
-      return exe.resolveSymbolicLinksSync();
-    }
-  }
-
-  return null;
-}
-
-class BufferedProcessAnalysisChannel extends AnalysisChannel {
-  Process _process;
-
+class BufferedProcessAnalysisChannel extends BufferedProcessWrapper
+                                     implements AnalysisChannel {
   @override
-  Future initialize() async {
-    var exePath = await getExecutablePath();
-    if (exePath == null) {
-      throw new Exception("Unable to find Dart SDK.");
-    }
-    var binDir = new File(exePath).parent;
-    var snapshot = new File(pathlib.join(binDir.path, "snapshots", "analysis_server.dart.snapshot"));
-    if (!(await snapshot.exists())) {
-      throw new Exception("Analysis Server Snapshot not found! ${snapshot.path}");
-    }
-    _process = await Process.start(Platform.executable, [snapshot.path]);
+  Future initialize() {
+    return new Future(() {
+      var snapshotPath = r'C:\Program Files\dart-sdk\bin\snapshots\analysis_server.dart.snapshot';
+      print(snapshotPath);
+      super.invoke('dart', [snapshotPath], {});
+    });
   }
 
   @override
   void send(Map<String, dynamic> json) {
-    _process.stdin.writeln(JSON.encode(json));
+    // TODO: _process.stdin.writeln(JSON.encode(json));
   }
 
   @override
   Stream<Map<String, dynamic>> stream() {
-    return _process.stdout.transform(UTF8.decoder).transform(new LineSplitter()).map((it) => JSON.decode(it));
+    return super.stdout.transform(UTF8.decoder).transform(new LineSplitter()).map((it) => JSON.decode(it));
   }
 }
 
@@ -89,8 +66,11 @@ class AnalysisClient {
   String get serverVersion => _serverVersion;
 
   Future initialize() async {
+    print('in initialize');
     await channel.initialize();
     channel.stream().listen((json) {
+      print('AnalysisClient: $json');
+
       _dataReceivedController.add(json);
 
       if (json.containsKey("error")) {

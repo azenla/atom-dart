@@ -4,8 +4,8 @@ packages:
   atom:
     description:
       ref: null
-      resolved-ref: d2489881c3085647db11555d4a3c9e1544f3f08f
-      url: "git@github.com:DirectMyFile/atom.dart"
+      resolved-ref: aaee6049840a5d7aca40456f64de71cf7a52db29
+      url: "git@github.com:DirectMyFile/atom.dart.git"
     source: git
     version: "1.0.0-v0.190.0"
   barback:
